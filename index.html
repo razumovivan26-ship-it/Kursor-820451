@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#fff9f3" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="description" content="Курсор — бесплатный открытый учебный портал социологов группы 820451, ТулГУ." />
+  <title>Курсор — группа 820451</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script>window.KURSOR_PUBLIC=true;</script>
+  <script src="./data-config.js" defer></script>
+  <script src="./seed.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="auth-wrap" id="authView" hidden>
+    <section class="auth-story">
+      <a class="brand brand-large" href="/"><span class="brand-glyph">✳</span><span>курсор<span class="brand-dot">.</span></span></a>
+      <div class="auth-story-body"><span class="micro-tag"><span class="dot"></span> ПОРТАЛ ГРУППЫ 820451</span>
+        <h1>Учёба —<br/>по полочкам<span class="period">.</span></h1>
+        <p>Расписание, материалы, курсовые и важные изменения. Одно уютное пространство для вашей группы.</p>
+        <div class="auth-mini">
+          <div class="mini-top"><span class="mini-calendar">▦</span><span>Всё самое важное</span><span class="mini-dot">● ● ●</span></div>
+          <div class="mini-row"><span class="mini-icon">◷</span><div><b>Актуальное расписание</b><small>Расписание группы по неделям</small></div><span>↗</span></div>
+          <div class="mini-row"><span class="mini-icon">✳</span><div><b>Материалы и курсовые</b><small>В одном месте, без поиска по чатам</small></div><span>↗</span></div>
+          <div class="mini-row"><span class="mini-icon">✧</span><div><b>Своя группа</b><small>Доступ только после подтверждения</small></div><span>↗</span></div>
+        </div>
+      </div>
+      <div class="auth-footer">Тульский государственный университет · Социология · 2 курс</div>
+      <div class="auth-deco deco-one"></div><div class="auth-deco deco-two"></div>
+    </section>
+    <section class="auth-area"><div class="auth-form-box">
+      <div class="auth-mobile-brand"><span class="brand-glyph">✳</span><strong>курсор<span class="brand-dot">.</span></strong><span>820451</span></div>
+      <div class="form-overline">ДОБРО ПОЖАЛОВАТЬ</div>
+      <h2 id="authTitle">Рады тебя видеть!</h2>
+      <p class="auth-subtitle" id="authSubtitle">Войди в аккаунт, чтобы открыть пространство группы.</p>
+      <div class="auth-switch"><button type="button" class="selected" id="loginTab">Вход</button><button type="button" id="registerTab">Регистрация</button></div>
+      <form id="authForm" autocomplete="on">
+        <label id="nameField" hidden>Имя и фамилия<input id="authName" type="text" autocomplete="name" placeholder="Как тебя зовут?" maxlength="100" /></label>
+        <label>Электронная почта<input id="authEmail" type="email" autocomplete="email" required placeholder="example@mail.ru" /></label>
+        <label>Пароль<input id="authPassword" type="password" autocomplete="current-password" minlength="10" required placeholder="Не менее 10 символов" /></label>
+        <div class="form-error" id="authError" role="alert" hidden></div>
+        <button type="submit" class="btn btn-primary wide" id="authSubmit">Войти в портал <span>↗</span></button>
+      </form>
+      <button type="button" class="auth-theme-toggle" id="authThemeToggle">☾ Переключить светлую / тёмную тему</button><p class="auth-fine">Регистрация проходит с подтверждением старостой. Доступ получат только участники группы.</p>
+    </div></section>
+  </div>
+
+  <div class="app-layout" id="appView" hidden>
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-head"><a href="#home" class="brand"><span class="brand-glyph">✳</span><span>курсор<span class="brand-dot">.</span></span></a><p>ПРОСТРАНСТВО ГРУППЫ</p></div>
+      <div class="group-card"><div class="group-avatar">82</div><div><b>Социология</b><small>Группа 820451 · 2 курс</small></div><span class="group-chevron">⌄</span></div>
+      <p class="nav-caption">НАВИГАЦИЯ</p>
+      <nav class="sidebar-links" id="sidebarLinks" aria-label="Разделы сайта">
+        <button data-nav="home" class="nav-link selected"><span class="nav-icon">▦</span>Главная</button>
+        <button data-nav="schedule" class="nav-link"><span class="nav-icon">▤</span>Расписание</button>
+        <button data-nav="materials" class="nav-link"><span class="nav-icon">▣</span>Материалы</button>
+        <button data-nav="courses" class="nav-link"><span class="nav-icon">◈</span>Темы курсовых</button>
+        <button data-nav="guide" class="nav-link"><span class="nav-icon">✎</span>Как писать курсовую</button>
+        <button data-nav="activity" class="nav-link"><span class="nav-icon">▥</span>Ответы на парах</button>
+        <button data-nav="appearance" class="nav-link"><span class="nav-icon">◉</span>Оформление</button>
+      </nav>
+      <div class="sidebar-admin" id="adminNav" hidden><p class="nav-caption">АДМИНИСТРИРОВАНИЕ</p><button data-nav="admin" class="nav-link"><span class="nav-icon">⚙</span>Управление <span id="pendingNavCount" class="num-pill" hidden>0</span></button></div>
+      <div class="sidebar-spacer"></div>
+      
+      <div class="sidebar-profile"><div class="profile-avatar" id="sidebarInitial">С</div><div><b id="sidebarName">Студент</b><small id="sidebarRole">Участник группы</small></div><button id="logoutButton" title="Выход не требуется" aria-label="Выход не требуется" hidden>↪</button></div>
+    </aside>
+    <div class="sidebar-overlay" id="sidebarOverlay" hidden></div>
+    <div class="main-column">
+      <header class="topbar"><div class="topbar-left"><button class="mobile-menu" id="menuButton" aria-label="Открыть меню">☰</button><div class="breadcrumb">Пространство группы <span>›</span> <b id="breadcrumbPage">Главная</b></div></div><div class="topbar-right"><button class="quick-theme" id="quickTheme" title="Сменить светлую или тёмную тему" aria-label="Сменить светлую или тёмную тему">☾</button><span class="topbar-date" id="currentDate"></span><span class="small-divider"></span><div class="top-profile"><span id="topName">Участник</span><div class="small-avatar" id="topInitial">С</div></div></div></header>
+      <main class="main-content">
+        <section class="page active" id="page-home">
+          <div class="page-heading"><div><div class="eyebrow">ВАШ УЧЕБНЫЙ КОМАНДНЫЙ ЦЕНТР</div><h1>Привет, <span id="greetingName">социолог</span> <span class="hello">✳</span></h1><p>Хороший день, чтобы быть в курсе всего.</p></div><span class="date-pill" id="datePill">Сегодня</span></div>
+          <div class="hero"><div class="hero-copy"><span class="hero-badge">✦ Здесь всё для вашей учёбы</span><h2>Всё важное.<br/><em>В одном месте.</em></h2><p>Расписание, изменения, файлы и курсовые — хватит искать нужное в сотне сообщений.</p><div class="hero-actions"><button class="btn btn-white" data-nav="schedule">Открыть расписание <span>↗</span></button><button class="btn btn-ghost-white" data-nav="materials">Материалы ↗</button></div></div><div class="hero-illustration" aria-hidden="true"><div class="orb orb-back"></div><div class="floating-paper paper-back"><i></i><i></i><i></i></div><div class="floating-paper paper-front"><span>МОЙ ПЛАН</span><div class="paper-line"><b>✓</b><i></i></div><div class="paper-line"><b>✓</b><i></i></div><div class="paper-line"><b>✓</b><i></i></div></div><span class="star star-a">✳</span><span class="star star-b">✧</span></div></div>
+          <div class="summary-grid"><div class="summary-card"><span class="summary-icon orange">▦</span><div><strong>820451</strong><small>Наша группа</small></div><span class="summary-spark">↗</span></div><div class="summary-card"><span class="summary-icon cream">◷</span><div><strong>2 курс</strong><small>Социология</small></div><span class="summary-spark">↗</span></div><div class="summary-card"><span class="summary-icon pale">♧</span><div><strong id="memberCount">82</strong><small>Темы курсовых</small></div><span class="summary-spark">↗</span></div><div class="summary-card"><span class="summary-icon pink">✦</span><div><strong id="noticeCount">0</strong><small>Объявлений группы</small></div><span class="summary-spark">↗</span></div></div>
+          <div class="home-columns"><div><div class="section-title"><div><div class="eyebrow">НА ПОВЕСТКЕ ДНЯ</div><h3>Важные обновления</h3></div><button data-nav="schedule" class="text-link">Расписание ↗</button></div><div class="surface recent-notices" id="homeNotices"></div></div><div><div class="section-title"><div><div class="eyebrow">БЕЗ РЕГИСТРАЦИИ</div><h3>Обновления портала</h3></div><span id="onlineCount" class="online-counter">Автообновление</span></div><div class="surface community-panel"><div class="community-note">Сайт доступен всем по ссылке. Обновления подгружаются автоматически, пока страница открыта.</div><div id="communityList" class="community-list"></div></div></div></div>
+        </section>
+
+        <section class="page" id="page-schedule"><div class="page-heading"><div><div class="eyebrow">ПЛАН НА НЕДЕЛЮ</div><h1>Расписание занятий<span class="period">.</span></h1><p>Чередование недель А и Б. Изменения расписания публикует староста.</p></div><span class="heading-pill">✳ Группа 820451</span></div>
+          <div class="week-switcher surface"><div><div class="eyebrow">ДВЕ ЧЕРЕДУЮЩИЕСЯ НЕДЕЛИ</div><b id="weekStatus">Неделя А / Б</b><p id="weekHelp">Пока староста не указал опорную неделю, выбери её вручную.</p></div><div class="segmented weeks"><button type="button" id="weekA" class="selected" data-week="A">Неделя А</button><button type="button" id="weekB" data-week="B">Неделя Б</button></div></div>
+          <div id="scheduleDays" class="schedule-days"></div>
+          <div class="schedule-fallback">Расписание перенесено с фотографий недель 2–6 и 9–13 ноября 2026 года. Проверьте его со старостой: часть карточек на снимках обрезана, особенно физкультура. <a href="https://tulsu.ru/schedule/?search=820451" target="_blank" rel="noopener noreferrer">Официальный источник ТулГУ ↗</a> — для сверки, не для отображения вместо карточек.</div>
+          <div class="section-title schedule-notices-title"><div><div class="eyebrow">ИНФОРМАЦИЯ ОТ СТАРОСТЫ</div><h3>Переносы и отмены</h3></div></div><div id="scheduleNotices" class="notice-grid"></div>
+
+        </section>
+
+        <section class="page" id="page-materials"><div class="page-heading"><div><div class="eyebrow">СОБРАНО ДЛЯ ВАШЕЙ ГРУППЫ</div><h1>Учебные материалы<span class="period">.</span></h1><p>Файлы, конспекты и ссылки по каждой дисциплине.</p></div></div><div class="section-search"><span>⌕</span><input type="search" id="materialSearch" placeholder="Найти предмет или материал..." /></div><div id="materialsContent" class="material-grid"></div></section>
+
+        <section class="page" id="page-courses"><div class="page-heading"><div><div class="eyebrow">ДВЕ ДИСЦИПЛИНЫ</div><h1>Темы курсовых<span class="period">.</span></h1><p>Все темы, распределение между студентами и статус защиты.</p></div></div>
+          <div class="course-toolbar surface"><div class="segmented course-switch"><button type="button" data-disc="history" class="selected">История социологии</button><button type="button" data-disc="theory">Теоретическая социология</button></div><label class="course-filter">Поиск по теме или студенту<input id="courseSearch" type="search" placeholder="Например, Ядов или фамилия" /></label><label class="course-filter">Показать<select id="courseFilter"><option value="all">Все темы</option><option value="free">Свободные</option><option value="taken">Занятые</option><option value="defended">Защищённые</option></select></label></div>
+          <div class="topic-overview" id="courseSummary"></div><div class="surface table-surface"><div class="table-top"><b id="courseHeading">История социологии</b><span id="courseCounter">0 тем</span></div><div class="table-scroll"><table class="course-table"><thead><tr><th>№</th><th>Тема работы</th><th>Ответственный</th><th>Статус</th></tr></thead><tbody id="courseRows"></tbody></table></div></div><div id="topicUnresolved"></div>
+        </section>
+
+        <section class="page" id="page-appearance"><div class="page-heading"><div><div class="eyebrow">ПЕРСОНАЛИЗАЦИЯ</div><h1>Оформление<span class="period">.</span></h1><p>Настрой сайт под себя: выбор сохранится только на твоём устройстве.</p></div></div>
+          <div class="appearance-layout"><div class="surface appearance-card"><div class="section-title"><div><div class="eyebrow">КОМФОРТ ДЛЯ ГЛАЗ</div><h3>Режим экрана</h3></div></div><div class="appearance-modes"><button type="button" data-mode="light"><span class="mode-preview mode-light">☼</span><b>Светлая</b><small>Мягкий белый фон</small></button><button type="button" data-mode="dark"><span class="mode-preview mode-dark">☾</span><b>Тёмная</b><small>Для вечера и ночи</small></button><button type="button" data-mode="system"><span class="mode-preview mode-system">◑</span><b>Системная</b><small>Как на устройстве</small></button></div></div>
+          <div class="surface appearance-card"><div class="section-title"><div><div class="eyebrow">ВЫБЕРИ НАСТРОЕНИЕ</div><h3>Акцентный цвет</h3></div></div><div class="color-grid"><button data-accent="orange" type="button"><i style="--swatch:#FF7514"></i>Оранжевый</button><button data-accent="red" type="button"><i style="--swatch:#E9676B"></i>Красный</button><button data-accent="blue" type="button"><i style="--swatch:#628FE4"></i>Синий</button><button data-accent="green" type="button"><i style="--swatch:#57A989"></i>Зелёный</button><button data-accent="yellow" type="button"><i style="--swatch:#C69A2D"></i>Жёлтый</button><button data-accent="purple" type="button"><i style="--swatch:#A27AE2"></i>Фиолетовый</button></div><p class="setting-footnote">Этот выбор не меняет оформление у других участников.</p></div></div>
+        </section>
+
+        <section class="page" id="page-guide"><div class="page-heading"><div><div class="eyebrow">ПОМОЩЬ В УЧЁБЕ</div><h1>Как писать курсовую<span class="period">.</span></h1><p>Небольшая памятка, чтобы ничего не забыть.</p></div></div><div class="guide-banner"><span>✦</span><div><h3>От идеи до защиты</h3><p>Универсальная структура работы. Точные правила и образец оформления нужно сверить с методичкой кафедры.</p></div></div><div class="guide-grid"><article><span>01</span><h3>Титульный лист</h3><p>Тема, автор, научный руководитель, университет, город и год.</p></article><article><span>02</span><h3>Введение</h3><p>Актуальность, объект, предмет, цель, задачи и методы исследования.</p></article><article><span>03</span><h3>Основная часть</h3><p>Теория, анализ литературы и собственные результаты исследования.</p></article><article><span>04</span><h3>Заключение</h3><p>Выводы, список источников и приложения при необходимости.</p></article></div></section>
+
+        <section class="page" id="page-activity"><div class="page-heading"><div><div class="eyebrow">ОТВЕТЫ НА СЕМИНАРАХ</div><h1>Активность на парах<span class="period">.</span></h1><p>Экономическая и теоретическая социология.</p></div></div><div class="empty-state surface"><div class="empty-visual">▥</div><h3>Скоро здесь будет статистика</h3><p>Статистика появится после подключения таблицы, предназначенной для общего просмотра.</p></div></section>
+
+        <section class="page" id="page-admin" hidden><div class="page-heading"><div><div class="eyebrow">ПАНЕЛЬ СТАРОСТЫ</div><h1>Управление порталом<span class="period">.</span></h1><p>Здесь ты управляешь доступом и содержимым сайта.</p></div><span class="admin-pill">✳ Администратор</span></div>
+          <div class="admin-tabs"><button data-admin-tab="members" class="active">Участники <span id="pendingTabCount"></span></button><button data-admin-tab="notices">Объявления</button><button data-admin-tab="materials">Материалы</button><button data-admin-tab="courses">Курсовые</button><button data-admin-tab="schedule">Расписание</button></div>
+          <div class="admin-panel active" id="admin-members"><div class="section-title"><div><div class="eyebrow">КОНТРОЛЬ ДОСТУПА</div><h3>Заявки на вступление</h3></div><span class="member-total" id="memberTotal"></span></div><div id="membersList" class="members-list"></div></div>
+          <div class="admin-panel" id="admin-notices"><div class="section-title"><div><div class="eyebrow">ЧТО НОВОГО</div><h3>Добавить объявление</h3></div></div><form id="noticeForm" class="editor-form surface"><div class="form-two"><label>Тип уведомления<select name="kind"><option value="info">Новость</option><option value="change">Перенос / изменение</option><option value="cancelled">Отмена пары</option></select></label><label>Дата занятия (если требуется)<input type="date" name="lesson_date" /></label></div><label>Заголовок<input name="title" maxlength="140" required placeholder="Например, перенос семинара" /></label><label>Подробности<textarea name="body" maxlength="1200" rows="3" required placeholder="Что изменилось и что нужно знать группе..."></textarea></label><button class="btn btn-primary" type="submit">Опубликовать ↗</button></form><div id="adminNoticeList" class="admin-records"></div></div>
+          <div class="admin-panel" id="admin-materials"><div class="section-title"><div><div class="eyebrow">БИБЛИОТЕКА ГРУППЫ</div><h3>Добавить материал</h3></div></div><form id="materialForm" class="editor-form surface"><label>Дисциплина<input name="discipline" maxlength="100" required placeholder="Например, теоретическая социология" /></label><label>Название файла<input name="title" maxlength="140" required placeholder="Конспект лекций" /></label><label>HTTPS-ссылка на материал<input name="url" type="url" required placeholder="https://drive.google.com/..." /></label><button class="btn btn-primary" type="submit">Добавить материал ↗</button></form><div id="adminMaterialList" class="admin-records"></div></div>
+          <div class="admin-panel" id="admin-courses"><div class="section-title"><div><div class="eyebrow">ДВЕ ДИСЦИПЛИНЫ</div><h3>Добавить или изменить тему</h3></div></div><form id="topicForm" class="editor-form surface"><div class="form-two"><label>Дисциплина<select name="discipline"><option value="history">История социологии</option><option value="theory">Теоретическая социология</option></select></label><label>Номер темы<input type="number" min="1" max="999" name="number" required placeholder="44" /></label></div><label>Тема курсовой<textarea name="title" maxlength="650" rows="2" required></textarea></label><label>Студент (можно оставить пустым)<input name="student" maxlength="100" placeholder="Имя Фамилия" /></label><label class="checkbox-line"><input type="checkbox" name="defended" />Работа защищена</label><button class="btn btn-primary" type="submit">Сохранить тему ↗</button></form><div id="adminCourseList" class="admin-records"></div></div>
+          <div class="admin-panel" id="admin-schedule"><div class="section-title"><div><div class="eyebrow">ЧЕРЕДОВАНИЕ НЕДЕЛЬ</div><h3>Редактор расписания</h3></div></div><form id="anchorForm" class="editor-form surface"><p class="helper-text">Укажи понедельник любой недели А — тогда сайт сам определит, какая неделя сейчас. Пока дата не задана, можно переключать недели вручную.</p><label>Понедельник недели А<input name="week_a_monday" id="weekAnchorInput" type="date" /></label><button class="btn btn-outline" type="submit">Сохранить чередование</button></form><form id="lessonForm" class="editor-form surface" style="margin-top:16px"><div class="form-two"><label>Неделя<select name="week"><option value="A">Неделя А</option><option value="B">Неделя Б</option><option value="both">Обе недели</option></select></label><label>День недели<select name="weekday"><option value="0">Понедельник</option><option value="1">Вторник</option><option value="2">Среда</option><option value="3">Четверг</option><option value="4">Пятница</option><option value="5">Суббота</option><option value="6">Воскресенье</option></select></label></div><div class="form-two"><label>Начало<input type="time" name="start_time" required value="09:00" /></label><label>Окончание<input type="time" name="end_time" required value="10:30" /></label></div><label>Дисциплина<input name="subject" maxlength="160" placeholder="Название дисциплины" required /></label><div class="form-two"><label>Преподаватель<input name="teacher" maxlength="120" placeholder="ФИО" /></label><label>Аудитория<input name="room" maxlength="80" placeholder="Например, 9-214" /></label></div><label>Тип занятия<input name="lesson_type" maxlength="70" placeholder="Лекция / семинар / практика" /></label><button class="btn btn-primary" type="submit">Сохранить пару ↗</button></form><div id="adminLessonList" class="admin-records"></div></div>
+        </section>
+      </main>
+      <footer class="footer">Открытый портал для группы <b>820451</b> <span>✳</span><span class="footer-note">Курсор · ТулГУ · 2026</span></footer>
+    </div>
+    <nav class="bottom-nav" aria-label="Мобильное меню"><button data-nav="home" class="active"><span>▦</span>Главная</button><button data-nav="schedule"><span>▤</span>Пары</button><button data-nav="materials"><span>▣</span>Файлы</button><button data-nav="courses"><span>◈</span>Курсовые</button><button id="moreNav" type="button"><span>☰</span>Ещё</button></nav>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
