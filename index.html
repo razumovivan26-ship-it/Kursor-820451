@@ -239,7 +239,7 @@ body{background:var(--bg);color:var(--ink)}
 @media(max-width:350px){.award-card{grid-template-columns:78px minmax(0,1fr);gap:10px;padding:10px}.award-text h3{font-size:17px}.award-text p{font-size:10px}}
 
 
-/* Курсор 2.5 — темы семинаров в разделе ответов */
+/* Курсор 2.6 — личный чек-лист тем семинаров */
 .answer-view-switch{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;margin-bottom:15px;background:var(--surface-soft,var(--paper));border:1px solid var(--line);border-radius:14px;max-width:460px}
 .answer-view-switch button{display:flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:10px 12px;border:1px solid transparent;border-radius:10px;color:var(--text);background:transparent;font-size:13px;font-weight:750;line-height:1.4}
 .answer-view-switch button.is-selected{background:var(--cream);border-color:var(--line);color:var(--deep);box-shadow:var(--shadow)}
@@ -253,6 +253,10 @@ body{background:var(--bg);color:var(--ink)}
 :root[data-visual-style="japan"] :is(.answer-view-switch,.answer-view-switch button,.seminar-count,.seminar-number),:root[data-visual-style="minimal"] :is(.answer-view-switch,.answer-view-switch button,.seminar-count,.seminar-number),:root[data-visual-style="future"] :is(.answer-view-switch,.answer-view-switch button,.seminar-count,.seminar-number){border-radius:3px}
 :root[data-visual-style="gothic"] .seminar-block-head h3,:root[data-visual-style="japan"] .seminar-intro h2,:root[data-visual-style="retro"] .seminar-intro h2{font-family:Georgia,serif}
 @media(max-width:600px){.answer-view-switch{max-width:none;margin-bottom:12px}.answer-view-switch button{font-size:12px;padding:9px 5px;gap:5px}.seminar-intro{padding:17px 14px;gap:10px}.seminar-count{min-width:64px;padding:9px 10px}.seminar-count strong{font-size:24px}.seminar-count small{font-size:10px}.seminar-intro p{font-size:12px}.seminar-block-head{padding:14px 12px;gap:8px}.seminar-block-head h3{font-size:14px}.seminar-block ol{padding:0 12px}.seminar-block li{font-size:13px;gap:10px;padding:12px 0}.seminar-controls input{font-size:16px!important}.seminar-number{flex-basis:29px;min-height:28px}}
+
+
+.seminar-progress{padding:17px 20px;margin-bottom:15px;display:grid;gap:11px}.seminar-progress-head{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;color:var(--text)}.seminar-progress-head b{color:var(--ink);font-size:14px}.seminar-progress-head strong{color:var(--deep);font-variant-numeric:tabular-nums;white-space:nowrap}.seminar-progress progress{display:block;width:100%;height:8px;border:0;border-radius:8px;overflow:hidden;background:var(--line);accent-color:var(--orange)}.seminar-progress progress::-webkit-progress-bar{background:var(--line);border-radius:8px}.seminar-progress progress::-webkit-progress-value{background:var(--orange);border-radius:8px}.seminar-progress progress::-moz-progress-bar{background:var(--orange);border-radius:8px}.seminar-progress-note{font-size:11px;line-height:1.5;color:var(--muted);margin:0}.seminar-controls select{min-height:44px;max-width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:var(--surface);color:var(--text);font:inherit;font-size:13px}.seminar-block li{padding:0;display:block}.seminar-check-row{display:flex;align-items:center;gap:12px;min-height:48px;padding:12px 0;cursor:pointer}.seminar-check-row input[type=checkbox]{appearance:auto;flex:0 0 22px;width:22px;height:22px;min-height:22px;margin:0;accent-color:var(--orange);cursor:pointer}.seminar-check-row input:focus-visible{outline:2px solid var(--deep);outline-offset:3px}.seminar-check-row .seminar-title{padding:0}.seminar-block li.is-answered .seminar-title{text-decoration:line-through;text-decoration-thickness:1.5px;color:var(--muted)}.seminar-block li.is-answered .seminar-number{opacity:.65}.seminar-block li.is-answered .seminar-check-row{background:var(--surface-soft,var(--surface))}.seminar-check-row:hover .seminar-title{color:var(--deep)}
+@media(max-width:600px){.seminar-controls select{width:100%;font-size:16px}.seminar-progress{padding:15px 14px}.seminar-block li{padding:0}.seminar-check-row{gap:9px;padding:12px 0}.seminar-check-row input[type=checkbox]{flex-basis:22px}}
 
 </style>
   <script>window.KURSOR_PUBLIC=true;</script>
@@ -376,7 +380,7 @@ window.KURSOR_STATIC_DATA={"notices":[],"materials":[{"discipline":"Методо
       <select id="answerSort" aria-label="Порядок сортировки"><option value="total">По количеству ответов</option><option value="name">По фамилии</option><option value="reports">По докладам</option><option value="extras">По дополнениям</option></select>
       <button id="answerRefresh" class="answer-refresh" type="button">↻ Обновить</button>
     </div>
-    <div class="seminar-controls" id="seminarControls" hidden><label class="answer-search-label"><span aria-hidden="true">⌕</span><input id="seminarSearch" type="search" placeholder="Найти тему или номер" aria-label="Поиск темы занятия" autocomplete="off"></label></div>
+    <div class="seminar-controls" id="seminarControls" hidden><label class="answer-search-label"><span aria-hidden="true">⌕</span><input id="seminarSearch" type="search" placeholder="Найти тему или номер" aria-label="Поиск темы занятия" autocomplete="off"></label><select id="seminarFilter" aria-label="Фильтр тем по личному прогрессу"><option value="all">Все темы</option><option value="left">Ещё не отвечал(а)</option><option value="done">Уже отвечал(а)</option></select></div>
   </div>
   <div id="answerStatsPanel">
   <div class="answer-statusline"><span id="answerStatus" role="status" aria-live="polite">Подключаем таблицу…</span><span class="answer-source-note">Данные доступны посетителям открытого сайта</span></div>
@@ -386,6 +390,7 @@ window.KURSOR_STATIC_DATA={"notices":[],"materials":[{"discipline":"Методо
   </div>
   <div id="answerTopicsPanel" hidden>
     <div class="seminar-intro surface"><div><div class="eyebrow">ПОДГОТОВКА К ЗАНЯТИЯМ</div><h2 id="seminarDiscipline">Экономическая социология</h2><p>Темы для подготовки к семинарам, докладам и устным ответам.</p></div><div class="seminar-count"><strong id="seminarCount">22</strong><small>темы</small></div></div>
+    <div class="surface seminar-progress"><div class="seminar-progress-head"><b>Мой прогресс</b><strong id="seminarProgressText" aria-live="polite">0 из 22</strong></div><progress id="seminarProgress" max="22" value="0" aria-label="Количество пройденных тем"></progress><p class="seminar-progress-note" id="seminarStorageNote">Отмечай темы, на которые уже ответил(а). Галочки видны только в этом браузере и не меняют общую статистику.</p></div>
     <p class="seminar-results" id="seminarResults" role="status" aria-live="polite"></p>
     <div class="seminar-list" id="seminarList"></div>
   </div>
@@ -801,18 +806,32 @@ window.KURSOR_STATIC_DATA={"notices":[],"materials":[{"discipline":"Методо
     }catch(e){s.error=e?.message||'Проверь публикацию CSV';}
     if(answersDisc===name)renderAnswers();
   }
+  const seminarProgressKey='kursor-seminar-progress-v1';
+  let seminarStorageOK=true;
+  function readSeminarProgress(){
+    try{const v=JSON.parse(localStorage.getItem(seminarProgressKey)||'{}');return {economics:new Set((Array.isArray(v?.economics)?v.economics:[]).filter(n=>Number.isInteger(n)&&n>=1&&n<=22)),theory:new Set((Array.isArray(v?.theory)?v.theory:[]).filter(n=>Number.isInteger(n)&&n>=1&&n<=21))};}
+    catch(e){seminarStorageOK=false;return {economics:new Set(),theory:new Set()};}
+  }
+  let seminarProgressState=readSeminarProgress();
+  function saveSeminarProgress(){try{localStorage.setItem(seminarProgressKey,JSON.stringify({economics:[...seminarProgressState.economics],theory:[...seminarProgressState.theory]}));seminarStorageOK=true;}catch(e){seminarStorageOK=false;}}
   function seminarNormalize(text){return String(text||'').toLocaleLowerCase('ru').replace(/ё/g,'е').trim();}
   function renderSeminarTopics(){
-    const groups=seminarTopics[answersDisc], total=groups.reduce((n,g)=>n+g.items.length,0);
+    const groups=seminarTopics[answersDisc], total=groups.reduce((n,g)=>n+g.items.length,0), done=seminarProgressState[answersDisc],filter=$('seminarFilter').value;
     const q=seminarNormalize($('seminarSearch').value),tokens=q.split(/\s+/).filter(Boolean);
-    const shown=groups.map(g=>({...g,items:g.items.filter(t=>tokens.every(k=>/^\d+$/.test(k)?t.number===Number(k):seminarNormalize(t.title+' '+g.title).includes(k)))})).filter(g=>g.items.length);
-    const count=shown.reduce((n,g)=>n+g.items.length,0);
+    const shown=groups.map(g=>({...g,items:g.items.filter(t=>(filter==='all'||(filter==='done'?done.has(t.number):!done.has(t.number)))&&tokens.every(k=>/^\d+$/.test(k)?t.number===Number(k):seminarNormalize(t.title+' '+g.title).includes(k)))})).filter(g=>g.items.length);
+    const count=shown.reduce((n,g)=>n+g.items.length,0), completed=groups.reduce((n,g)=>n+g.items.filter(t=>done.has(t.number)).length,0);
     $('seminarDiscipline').textContent=answersDisc==='economics'?'Экономическая социология':'Теоретическая социология';
     $('seminarCount').textContent=total;
     $('seminarCount').nextElementSibling.textContent=total%10===1&&total%100!==11?'тема':'темы';
-    $('seminarResults').textContent=q?`Найдено: ${count} из ${total}`:`${groups.length} тематических блока · исходная нумерация`;
-    $('seminarList').innerHTML=shown.length?shown.map(g=>`<article class="surface seminar-block"><div class="seminar-block-head"><span class="seminar-block-mark" aria-hidden="true">▤</span><h3>${escapeHTML(g.title)}</h3><small>${g.items.length} ${g.items.length===1?'тема':g.items.length<5?'темы':'тем'}</small></div><ol>${g.items.map(t=>`<li value="${t.number}"><span class="seminar-number">${String(t.number).padStart(2,'0')}</span><span class="seminar-title">${escapeHTML(t.title)}</span></li>`).join('')}</ol></article>`).join(''):'<div class="surface seminar-empty">Темы не найдены. Попробуй другой запрос.</div>';
+    $('seminarProgressText').textContent=`${completed} из ${total} · осталось ${total-completed}`;
+    $('seminarProgress').max=total;$('seminarProgress').value=completed;
+    $('seminarStorageNote').textContent=seminarStorageOK?'Отмечай темы, на которые уже ответил(а). Галочки сохраняются в этом браузере и не меняют общую статистику.':'Хранилище браузера недоступно. Галочки могут не сохраниться после закрытия страницы.';
+    $('seminarResults').textContent=q||filter!=='all'?`Показано: ${count} из ${total}`:`${groups.length} тематических блока · исходная нумерация`;
+    $('seminarList').innerHTML=shown.length?shown.map(g=>`<article class="surface seminar-block"><div class="seminar-block-head"><span class="seminar-block-mark" aria-hidden="true">▤</span><h3>${escapeHTML(g.title)}</h3><small>${g.items.length} ${g.items.length===1?'тема':g.items.length<5?'темы':'тем'}</small></div><ol>${g.items.map(t=>`<li value="${t.number}" class="${done.has(t.number)?'is-answered':''}"><label class="seminar-check-row"><input type="checkbox" data-seminar-number="${t.number}" ${done.has(t.number)?'checked':''} aria-label="Отметить тему ${t.number}: ${escapeHTML(t.title)}"><span class="seminar-number">${String(t.number).padStart(2,'0')}</span><span class="seminar-title">${escapeHTML(t.title)}</span></label></li>`).join('')}</ol></article>`).join(''):`<div class="surface seminar-empty">${q?'Темы не найдены. Попробуй другой запрос.':filter==='done'?'Пока нет отмеченных тем.':filter==='left'?'Все темы отмечены!':'Темы не найдены.'}</div>`;
   }
+  $('seminarList').addEventListener('change',e=>{const el=e.target;if(!el.matches('input[data-seminar-number]'))return;const n=Number(el.dataset.seminarNumber);const done=seminarProgressState[answersDisc];if(el.checked)done.add(n);else done.delete(n);saveSeminarProgress();renderSeminarTopics();const next=$('seminarList').querySelector(`input[data-seminar-number="${n}"]`);if(next)next.focus({preventScroll:true});else $('seminarFilter').focus({preventScroll:true});});
+  $('seminarFilter').addEventListener('change',renderSeminarTopics);
+  window.addEventListener('storage',e=>{if(e.key===seminarProgressKey||e.key===null){seminarProgressState=readSeminarProgress();if(answerView==='topics')renderSeminarTopics();}});
   function selectAnswerView(view){
     answerView=view==='topics'?'topics':'stats';const topics=answerView==='topics';
     document.querySelectorAll('[data-answer-view]').forEach(b=>{let on=b.dataset.answerView===answerView;b.classList.toggle('is-selected',on);b.setAttribute('aria-pressed',String(on));});
