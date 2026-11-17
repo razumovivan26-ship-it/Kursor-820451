@@ -117,8 +117,49 @@ body{background:var(--bg);color:var(--ink)}
 :root[data-theme="dark"] .community-panel{background:var(--surface);border-color:var(--line)}
 @media(max-width:600px){.community-list{max-height:430px}.community-panel{min-height:190px}}
 
+
+/* Статистика ответов — отзывчивый интерфейс; использует действующую тему. */
+.answer-toolbar{padding:18px 19px;display:flex;flex-direction:column;gap:15px;margin-bottom:13px}
+.answer-disciplines{display:flex;flex-wrap:wrap;gap:9px}
+.answer-tab{color:var(--text);border:1px solid var(--line);border-radius:12px;background:var(--surface,#fff);padding:13px 18px;min-height:46px;font-size:12px;font-weight:800}
+.answer-tab.is-selected{background:var(--orange);color:white;border-color:var(--orange)}
+.answer-controls{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.answer-search-label{flex:1;display:flex;align-items:center;gap:8px;min-width:170px;border:1px solid var(--line);border-radius:11px;padding:0 12px;background:var(--surface,#fff)}
+.answer-search-label span{font-size:22px;color:var(--orange)}
+.answer-search-label input{width:100%;min-width:0;border:0;background:transparent;outline:none;min-height:45px;color:var(--ink);font-size:13px}
+.answer-controls select,.answer-refresh{border:1px solid var(--line);border-radius:11px;background:var(--surface,#fff);color:var(--text);min-height:45px;padding:0 12px;font-size:12px;font-weight:750}
+.answer-refresh{color:var(--orange)}
+.answer-statusline{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center;font-size:11px;color:var(--muted);margin:16px 2px}
+.answer-statusline .failure{color:#b94e40}
+.answer-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}
+.answer-stat{background:var(--surface,#fff);padding:17px;border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;gap:6px}
+.answer-stat b{font-size:24px;line-height:1.2;color:var(--ink)}
+.answer-stat span{font-size:11px;color:var(--muted);font-weight:700}
+.answer-table-box{overflow:hidden}
+.answer-table{width:100%;border-collapse:collapse;table-layout:fixed}
+.answer-table th{padding:17px 18px;text-align:left;font-size:11px;color:var(--muted);font-weight:800;background:var(--cream);border-bottom:1px solid var(--line)}
+.answer-table td{padding:15px 18px;border-bottom:1px solid var(--line);font-size:12px;color:var(--text);font-variant-numeric:tabular-nums}
+.answer-table tr:last-child td{border-bottom:0}
+.answer-table th:not(:first-child),.answer-table td:not(:first-child){text-align:center;width:17%}
+.answer-table td:first-child{font-weight:800;color:var(--ink);overflow-wrap:anywhere}
+.answer-total{display:inline-block;min-width:35px;background:var(--cream);color:var(--deep);border-radius:10px;padding:7px 9px;font-weight:850}
+.answer-empty{text-align:center;padding:48px 20px;line-height:1.8;color:var(--muted);font-size:13px}
+.answer-help{color:var(--muted);font-size:11px;line-height:1.8;margin-top:14px}
+:root[data-theme="dark"] .answer-tab,:root[data-theme="dark"] .answer-controls select,:root[data-theme="dark"] .answer-refresh,:root[data-theme="dark"] .answer-search-label,:root[data-theme="dark"] .answer-stat{background:var(--surface)}
+:root[data-theme="dark"] .answer-tab.is-selected{background:var(--orange);color:#fff}
+@media(max-width:700px){.answer-table,.answer-table tbody{display:block;width:100%!important;max-width:100%!important;min-width:0!important}.answer-table thead{display:none}.answer-table tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;border-bottom:1px solid var(--line);padding:12px}.answer-table td,.answer-table td:not(:first-child){display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;width:auto!important;border:0!important;padding:4px 2px!important;font-size:12px!important}.answer-table td:first-child{grid-column:1/-1;display:block;text-align:left;font-size:13px!important;margin-bottom:6px}.answer-table td:not(:first-child)::before{font-size:10px;color:var(--muted);font-weight:750;margin-bottom:6px}.answer-table td:nth-child(2)::before{content:"Доклады"}.answer-table td:nth-child(3)::before{content:"Дополнения"}.answer-table td:nth-child(4)::before{content:"Всего"}}
+@media(max-width:700px){.answer-summary{gap:7px}.answer-stat{padding:12px 9px}.answer-stat b{font-size:21px}.answer-stat span{font-size:10px}.answer-tab{flex:1;min-width:125px;padding:11px 9px;line-height:1.5}.answer-toolbar{padding:13px}.answer-controls select{flex:1;min-width:120px}.answer-table th,.answer-table td{padding:12px 7px;font-size:11px}.answer-table th:not(:first-child),.answer-table td:not(:first-child){width:18%}.answer-total{min-width:28px;padding:6px}.answer-statusline{line-height:1.5}}
+
 </style>
   <script>window.KURSOR_PUBLIC=true;</script>
+  <script>
+// Только открытые CSV-выгрузки отдельных листов; исходная таблица остаётся закрытой.
+window.KURSOR_ACTIVITY_CSV={
+  "economics": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQqf599iMjJZEiXhoL0FIKBt_Q-c5ITUH9CsU2iHpgB201BCGg_LD2YiXhiDKB_J_s-tn44UaNv2zU5/pub?gid=2091896740&single=true&output=csv",
+  "theory": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQqf599iMjJZEiXhoL0FIKBt_Q-c5ITUH9CsU2iHpgB201BCGg_LD2YiXhiDKB_J_s-tn44UaNv2zU5/pub?gid=2065202598&single=true&output=csv"
+};
+</script>
+
   <script>
 // Заполни URL опубликованных CSV-таблиц Google Sheets по одному на раздел.
 // Пока ссылки пустые, сайт использует готовые данные из data/content.json.
@@ -222,7 +263,24 @@ window.KURSOR_STATIC_DATA={"notices":[],"materials":[],"topics":[{"discipline":"
 
         <section class="page" id="page-guide"><div class="page-heading"><div><div class="eyebrow">ПОМОЩЬ В УЧЁБЕ</div><h1>Как писать курсовую<span class="period">.</span></h1><p>Небольшая памятка, чтобы ничего не забыть.</p></div></div><div class="guide-banner"><span>✦</span><div><h3>От идеи до защиты</h3><p>Универсальная структура работы. Точные правила и образец оформления нужно сверить с методичкой кафедры.</p></div></div><div class="guide-grid"><article><span>01</span><h3>Титульный лист</h3><p>Тема, автор, научный руководитель, университет, город и год.</p></article><article><span>02</span><h3>Введение</h3><p>Актуальность, объект, предмет, цель, задачи и методы исследования.</p></article><article><span>03</span><h3>Основная часть</h3><p>Теория, анализ литературы и собственные результаты исследования.</p></article><article><span>04</span><h3>Заключение</h3><p>Выводы, список источников и приложения при необходимости.</p></article></div></section>
 
-        <section class="page" id="page-activity"><div class="page-heading"><div><div class="eyebrow">ОТВЕТЫ НА СЕМИНАРАХ</div><h1>Активность на парах<span class="period">.</span></h1><p>Экономическая и теоретическая социология.</p></div></div><div class="empty-state surface"><div class="empty-visual">▥</div><h3>Скоро здесь будет статистика</h3><p>Статистика появится после подключения таблицы, предназначенной для общего просмотра.</p></div></section>
+        <section class="page" id="page-activity">
+  <div class="page-heading"><div><div class="eyebrow">УЧЁТ ОТВЕТОВ НА ЗАНЯТИЯХ</div><h1>Ответы на парах<span class="period">.</span></h1><p>Данные подгружаются из Google Таблиц. Подсчёт: доклады + дополнения.</p></div></div>
+  <div class="answer-toolbar surface">
+    <div class="answer-disciplines" aria-label="Выбор дисциплины">
+      <button type="button" class="answer-tab is-selected" data-answer-disc="economics" aria-pressed="true">Экономическая социология</button>
+      <button type="button" class="answer-tab" data-answer-disc="theory" aria-pressed="false">Теоретическая социология</button>
+    </div>
+    <div class="answer-controls">
+      <label class="answer-search-label"><span aria-hidden="true">⌕</span><input id="answerSearch" type="search" placeholder="Найти одногруппника" aria-label="Поиск по фамилии или имени" autocomplete="off"></label>
+      <select id="answerSort" aria-label="Порядок сортировки"><option value="total">По количеству ответов</option><option value="name">По фамилии</option><option value="reports">По докладам</option><option value="extras">По дополнениям</option></select>
+      <button id="answerRefresh" class="answer-refresh" type="button">↻ Обновить</button>
+    </div>
+  </div>
+  <div class="answer-statusline"><span id="answerStatus" role="status" aria-live="polite">Подключаем таблицу…</span><span class="answer-source-note">Данные доступны посетителям открытого сайта</span></div>
+  <div class="answer-summary" id="answerSummary" hidden></div>
+  <div class="answer-table-box surface" id="answerTableBox"><div class="answer-empty">Загружаем данные из Google Таблицы…</div></div>
+  <p class="answer-help">Староста обновляет исходную Google Таблицу, а эта страница периодически загружает новую опубликованную версию. Google может публиковать изменения с задержкой в несколько минут.</p>
+</section>
 
         <section class="page" id="page-admin" hidden><div class="page-heading"><div><div class="eyebrow">ПАНЕЛЬ СТАРОСТЫ</div><h1>Управление порталом<span class="period">.</span></h1><p>Здесь ты управляешь доступом и содержимым сайта.</p></div><span class="admin-pill">✳ Администратор</span></div>
           <div class="admin-tabs"><button data-admin-tab="members" class="active">Участники <span id="pendingTabCount"></span></button><button data-admin-tab="notices">Объявления</button><button data-admin-tab="materials">Материалы</button><button data-admin-tab="courses">Курсовые</button><button data-admin-tab="schedule">Расписание</button></div>
@@ -337,6 +395,7 @@ window.KURSOR_STATIC_DATA = {"notices":[],"materials":[],"topics":[{"discipline"
     $('breadcrumbPage').textContent=titles[page];hideDrawer();
     if(push && location.hash!=='#'+page) history.replaceState(null,'','#'+page);
     window.scrollTo({top:0,behavior:'auto'});
+    if(page==='activity')refreshAnswers().catch(()=>{});
 
   }
   function hydrateAccount(){
@@ -422,7 +481,7 @@ window.KURSOR_STATIC_DATA = {"notices":[],"materials":[],"topics":[{"discipline"
     if(!state.user||document.hidden)return;
     try{await api('/presence',{method:'POST'});}catch{}
   }
-  setInterval(()=>{if(state.user&&!document.hidden){sendPresence();refreshData().catch(()=>{});}},45000);
+  setInterval(()=>{if(state.user&&!document.hidden){sendPresence();refreshData().catch(()=>{});if(state.page==='activity')refreshAnswers().catch(()=>{});}},45000);
   document.addEventListener('visibilitychange',()=>{if(!document.hidden&&state.user){sendPresence();refreshData().catch(()=>{});}});
   function renderMaterials(){
     const q=$('materialSearch').value.toLocaleLowerCase('ru');const entries=state.materials.filter(x=>(x.discipline+' '+x.title).toLocaleLowerCase('ru').includes(q));
@@ -566,6 +625,60 @@ window.KURSOR_STATIC_DATA = {"notices":[],"materials":[],"topics":[{"discipline"
     const keys=rows.shift().map(x=>x.trim());
     return rows.map(r=>Object.fromEntries(keys.map((k,i)=>[k,(r[i]||'').trim()])));
   }
+
+  // Открытая статистика: читаем только опубликованные CSV, никаких токенов или приватного Google API.
+  const answersStore={economics:{items:null,fetched:0,error:''},theory:{items:null,fetched:0,error:''}};
+  let answersDisc='economics';
+  const answerNum = value => {const n=Number(String(value??'').trim().replace(',','.'));return Number.isFinite(n) && n>0 ? Math.round(n) : 0;};
+  function unpackAnswers(csv){
+    const source=parseCsv(csv);
+    if(!csv.trim() || !source.length){throw new Error('Опубликованная таблица пуста или ещё недоступна');}
+    // Поддерживаем текущие заголовки Google Таблицы (ФИО, Доклады, Дополнения).
+    const cols=Object.keys(source[0]).map(x=>x.trim().toLocaleLowerCase('ru'));
+    if(!cols.includes('фио') || !cols.includes('доклады') || !cols.includes('дополнения')){
+      throw new Error('Не найдены столбцы ФИО, Доклады и Дополнения');
+    }
+    return source.map(r=>({name:String(r['ФИО']||'').trim(),reports:answerNum(r['Доклады']),extras:answerNum(r['Дополнения'])}))
+      .filter(r=>r.name).map(r=>({...r,total:r.reports+r.extras}));
+  }
+  const answerFmtTime = date => new Intl.DateTimeFormat('ru-RU',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Moscow'}).format(date);
+  function renderAnswers(){
+    const s=answersStore[answersDisc];
+    document.querySelectorAll('[data-answer-disc]').forEach(b=>{let on=b.dataset.answerDisc===answersDisc;b.classList.toggle('is-selected',on);b.setAttribute('aria-pressed',String(on));});
+    const status=$('answerStatus'),target=$('answerTableBox'),summary=$('answerSummary');
+    if(!s.items){summary.hidden=true;status.innerHTML=s.error?'<span class="failure">Не удалось обновить статистику</span>':'Подключаем таблицу…';
+      target.innerHTML=`<div class="answer-empty">${s.error?escapeHTML(s.error)+'. Нажми «Обновить», чтобы повторить попытку.':'Загружаем ответы…'}</div>`;return;
+    }
+    status.textContent=(s.error?'Показаны последние загруженные данные · ':'Обновлено в ')+answerFmtTime(new Date(s.fetched));
+    const list=s.items;
+    const sum=(field)=>list.reduce((n,r)=>n+r[field],0);
+    summary.hidden=false;
+    summary.innerHTML=`<div class="answer-stat"><b>${list.length}</b><span>Студентов в таблице</span></div><div class="answer-stat"><b>${sum('reports')}</b><span>Докладов</span></div><div class="answer-stat"><b>${sum('extras')}</b><span>Дополнений</span></div>`;
+    const q=$('answerSearch').value.trim().toLocaleLowerCase('ru'),sort=$('answerSort').value;
+    const shown=list.filter(r=>r.name.toLocaleLowerCase('ru').includes(q)).sort((a,b)=>sort==='name'?a.name.localeCompare(b.name,'ru'):b[sort]-a[sort]||a.name.localeCompare(b.name,'ru'));
+    target.innerHTML=shown.length?`<table class="answer-table"><thead><tr><th>Студент</th><th>Доклады</th><th>Дополнения</th><th>Всего</th></tr></thead><tbody>${shown.map(r=>`<tr><td>${escapeHTML(r.name)}</td><td>${r.reports}</td><td>${r.extras}</td><td><span class="answer-total">${r.total}</span></td></tr>`).join('')}</tbody></table>`:'<div class="answer-empty">По вашему запросу никто не найден.</div>';
+  }
+  async function refreshAnswers(force=false){
+    if(!window.KURSOR_PUBLIC)return;
+    const name=answersDisc, s=answersStore[name],src=(window.KURSOR_ACTIVITY_CSV||{})[name];
+    if(!src){s.error='Ссылка на CSV ещё не добавлена';renderAnswers();return;}
+    if(!force && s.items && Date.now()-s.fetched<40000){renderAnswers();return;}
+    if(!s.items){$('answerStatus').textContent='Обновляем данные…';}
+    try{
+      const url=src+(src.includes('?')?'&':'?')+'_ts='+Date.now();
+      const response=await fetch(url,{cache:'no-store'});
+      if(!response.ok)throw new Error('Google вернул ошибку '+response.status);
+      const csv=await response.text();
+      if(csv.trim().startsWith('<'))throw new Error('Google вернул страницу вместо CSV');
+      s.items=unpackAnswers(csv);s.fetched=Date.now();s.error='';
+    }catch(e){s.error=e?.message||'Проверь публикацию CSV';}
+    if(answersDisc===name)renderAnswers();
+  }
+  document.querySelectorAll('[data-answer-disc]').forEach(b=>b.addEventListener('click',()=>{answersDisc=b.dataset.answerDisc;renderAnswers();refreshAnswers();}));
+  $('answerSearch').addEventListener('input',renderAnswers);
+  $('answerSort').addEventListener('change',renderAnswers);
+  $('answerRefresh').addEventListener('click',()=>refreshAnswers(true));
+
   function normalizeRows(category,rows){
     const result=[];
     for(const record of rows){
