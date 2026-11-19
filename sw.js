@@ -1,5 +1,29 @@
-const CACHE='kursor-public-shell-v4-1-hotfix2';
-const FILES=['./','./index.html','./kursor.js?v=4.1','./kursor.css?v=4.1','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
-self.addEventListener('install',e=>e.waitUntil((async()=>{const c=await caches.open(CACHE);await c.addAll(FILES.map(u=>new Request(u,{cache:'reload'})));await self.skipWaiting();})()));
-self.addEventListener('activate',e=>e.waitUntil((async()=>{for(const key of await caches.keys())if(key.startsWith('kursor-public-shell-')&&key!==CACHE)await caches.delete(key);await self.clients.claim();})()));
-self.addEventListener('fetch',e=>{const r=e.request,u=new URL(r.url),scope=new URL(self.registration.scope);if(r.method!=='GET'||u.origin!==scope.origin||r.headers.has('Authorization'))return;const allowed=FILES.map(x=>new URL(x,scope).href);if(!allowed.includes(u.href)&&!(r.mode==='navigate'&&(u.pathname===scope.pathname||u.pathname===new URL('./index.html',scope).pathname)))return;e.respondWith((async()=>{const cache=await caches.open(CACHE);try{const res=await fetch(r,{cache:'no-cache'});if(res.ok){await cache.put(new Request(r.mode==='navigate'?new URL('./index.html',scope).href:u.href),res.clone());}return res;}catch{const hit=await cache.match(new Request(r.mode==='navigate'?new URL('./index.html',scope).href:u.href));return hit||Response.error();}})());});
+const CACHE='kursor-public-shell-v4-2-1';
+const FILES=['./index.html','./kursor.js?v=4.2.1','./kursor.css?v=4.2.1','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
+const scope=new URL(self.registration.scope);
+const url=x=>new URL(x,scope).href;
+const shell=url('./index.html');
+const assets=new Set(FILES.slice(1).map(url));
+self.addEventListener('install',event=>event.waitUntil((async()=>{
+  const cache=await caches.open(CACHE);
+  // Preload only the public shell. Activation follows a complete core download.
+  await cache.addAll(FILES.map(x=>new Request(url(x),{cache:'reload'})));
+  await self.skipWaiting();
+})()));
+self.addEventListener('activate',event=>event.waitUntil((async()=>{
+  for(const key of await caches.keys())if(key.startsWith('kursor-public-shell-')&&key!==CACHE)await caches.delete(key);
+  await self.clients.claim();
+})()));
+self.addEventListener('fetch',event=>{
+  const r=event.request,u=new URL(r.url);
+  if(r.method!=='GET'||u.origin!==scope.origin||r.headers.has('Authorization'))return;
+  const navigation=r.mode==='navigate'&&(u.pathname===scope.pathname||u.pathname===new URL(shell).pathname);
+  if(!navigation&&!assets.has(u.href))return;
+  event.respondWith((async()=>{
+    const c=await caches.open(CACHE);
+    if(!navigation){const hit=await c.match(u.href);if(hit)return hit;const res=await fetch(r);if(res.ok)await c.put(u.href,res.clone());return res;}
+    const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),2200);
+    try{const res=await fetch(r,{cache:'no-cache',signal:ctrl.signal});if(!res.ok)throw Error('HTTP '+res.status);await c.put(shell,res.clone());return res;}
+    catch{return (await c.match(shell))||Response.error();}finally{clearTimeout(timer);}
+  })());
+});
