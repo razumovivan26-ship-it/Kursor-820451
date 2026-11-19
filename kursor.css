@@ -277,3 +277,19 @@ body{background:var(--bg);color:var(--ink)}
 :root[data-visual-style=glass] body{background:radial-gradient(at 0 0,#9dadd544,transparent 55%),radial-gradient(at 100% 80%,#bfa3d655,transparent 55%),var(--bg)}:root[data-visual-style=glass] .surface,:root[data-visual-style=glass] .summary-card{background:color-mix(in srgb,var(--paper) 80%,transparent);backdrop-filter:blur(12px);border:1px solid color-mix(in srgb,var(--orange) 14%,var(--line))}:root[data-visual-style=glass] .hero{background:linear-gradient(120deg,#46669e,#795b9f,var(--orange))}
 :root[data-visual-style=midnight] .hero{background:radial-gradient(at 85% 5%,#527bb2,#11213c 65%)}:root[data-visual-style=midnight] .surface{border:1px solid #6394d54d}:root[data-k4-season=winter] .hero{outline:1px solid #8fc6e4}:root[data-k4-season=spring] .hero{outline:1px solid #e5a1c3}:root[data-k4-season=summer] .hero{outline:1px solid #e5c56a}:root[data-k4-season=autumn] .hero{outline:1px solid #c58c64}
 @media(max-width:650px){.k4-box{padding:16px}.k4-home{flex-direction:column;align-items:flex-start}.k4-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.k4-row{flex-wrap:wrap}.k4-season{top:10px;right:64px}.k4-form .btn{width:100%}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+/* 4.1: responsive medals and navigation */
+.k4-achievements{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.k4-medal{min-width:0;align-items:flex-start;gap:12px;overflow:hidden}
+.k4-medal i{flex:0 0 44px;width:44px;height:44px;aspect-ratio:1;border-radius:50%}
+.k4-medal i svg{width:23px;height:23px;display:block}
+.k4-medal-copy{min-width:0;flex:1;overflow-wrap:anywhere;hyphens:auto}
+.k4-medal-copy b{display:block;font-size:14px;line-height:1.35;letter-spacing:0}
+.k4-medal-copy p{margin:4px 0;font-size:12px;line-height:1.4}
+.k4-medal-copy small{display:block;font-size:11px;line-height:1.4;color:var(--deep)}
+.k4-medal.locked{opacity:1}.k4-medal.locked i{opacity:.65}.k4-medal.locked .k4-medal-copy,.k4-medal.locked small{color:var(--muted)}
+.sidebar-links{flex-shrink:0;overflow:visible}.sidebar-links .nav-link{flex-shrink:0}.sidebar-head,.sidebar-admin,.sidebar-profile{flex-shrink:0}.sidebar{overflow-y:auto;overscroll-behavior:contain}
+.k4-profile>div:last-child{min-width:0;overflow-wrap:anywhere}.k4-stat{min-width:0;overflow-wrap:anywhere}
+.k4-box .btn-primary{background:var(--deep);color:var(--surface);font-weight:750}
+@media(max-width:650px){.k4-achievements{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.k4-medal{flex-direction:column;align-items:center;text-align:center;padding:12px 7px;gap:8px}.k4-medal-copy{width:100%;flex:1;display:flex;flex-direction:column;align-items:center}.k4-medal-copy b{font-size:13px}.k4-medal-copy small{margin-top:auto}.k4-medal i{flex-basis:42px;width:42px;height:42px}.k4-medal-copy p{font-size:11px}}
+@media(max-width:350px){.k4-achievements{grid-template-columns:1fr}.k4-medal{flex-direction:row;text-align:left}.k4-medal-copy{align-items:flex-start;width:auto}}
