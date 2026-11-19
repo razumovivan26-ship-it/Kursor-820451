@@ -100,8 +100,34 @@ window.KURSOR_STATIC_DATA={"notices":[],"materials":[{"discipline":"Методо
   function toggleDrawer(){let opened=$('sidebar').classList.toggle('open');$('sidebarOverlay').hidden=!opened;}
   $('menuButton').addEventListener('click',toggleDrawer);
   $('moreNav').addEventListener('click',toggleDrawer);
+  // Four shortcuts are local to the device. No new server requests.
+  const mobileNavKey='kursor-mobile-nav-v1';
+  const mobileNavDefault=['home','schedule','materials','courses'];
+  const mobileNavLabels={home:'Главная',schedule:'Пары',materials:'Файлы',courses:'Курсовые',guide:'Гайд',activity:'Ответы',methodology:'Тесты',group:'Группа',planner:'Задачи',appearance:'Стиль',account:'Аккаунт'};
+  function readMobileNav(){try{const a=JSON.parse(localRead(mobileNavKey,'null'));if(Array.isArray(a)&&a.length===4&&new Set(a).size===4&&a.every(k=>Object.prototype.hasOwnProperty.call(mobileNavLabels,k)))return a;}catch{}return [...mobileNavDefault];}
+  function changeMobileNavSlot(order,i,next){const copy=[...order],old=copy[i],other=copy.indexOf(next);if(other>=0)copy[other]=old;copy[i]=next;return copy;}
+  let mobileNavOrder=readMobileNav();
+  const mobileNavRoot=document.querySelector('.bottom-nav');
+  const mobileNavMore=$('moreNav');
+  function mobileNavIcon(key){return document.querySelector('#sidebarLinks [data-nav="'+key+'"] svg')?.outerHTML||'';}
+  function updateMobileNavActive(){mobileNavRoot.querySelectorAll('[data-nav]').forEach(b=>{const active=b.dataset.nav===state.page;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});mobileNavMore.classList.toggle('active',!mobileNavOrder.includes(state.page));}
+  function renderMobileNav(){
+    mobileNavRoot.querySelectorAll('[data-nav]').forEach(b=>b.remove());
+    for(const key of mobileNavOrder){const b=document.createElement('button');b.type='button';b.dataset.nav=key;b.setAttribute('aria-label',titles[key]);b.title=titles[key];b.innerHTML='<span>'+mobileNavIcon(key)+'</span><span class="mobile-nav-label">'+mobileNavLabels[key]+'</span>';mobileNavRoot.insertBefore(b,mobileNavMore);}
+    updateMobileNavActive();
+    const preview=$('mobileNavPreview');preview.replaceChildren();
+    for(const key of [...mobileNavOrder,'more']){const item=document.createElement('div');item.className='mobile-preview-item';item.innerHTML='<span>'+ (key==='more'?mobileNavMore.querySelector('svg').outerHTML:mobileNavIcon(key))+'</span><span class="mobile-nav-label">'+(mobileNavLabels[key]||'Ещё')+'</span>';preview.append(item);}
+    const slots=$('mobileNavSlots');if(!slots.children.length){for(let i=0;i<4;i++){const label=document.createElement('label');label.textContent='Место '+(i+1);const select=document.createElement('select');select.setAttribute('aria-label','Место '+(i+1));for(const key of Object.keys(mobileNavLabels)){const option=document.createElement('option');option.value=key;option.textContent=titles[key];select.append(option);}select.addEventListener('change',()=>{const next=select.value;if(!Object.prototype.hasOwnProperty.call(mobileNavLabels,next))return;mobileNavOrder=changeMobileNavSlot(mobileNavOrder,i,next);saveMobileNav();});label.append(select);slots.append(label);}}
+    slots.querySelectorAll('select').forEach((select,i)=>select.value=mobileNavOrder[i]);
+  }
+  function saveMobileNav(){const ok=localWrite(mobileNavKey,JSON.stringify(mobileNavOrder));renderMobileNav();$('mobileNavStatus').textContent=ok?'Панель сохранена на этом устройстве.':'Панель изменена; браузер не разрешил сохранение.';}
+  $('mobileNavReset').addEventListener('click',()=>{mobileNavOrder=[...mobileNavDefault];saveMobileNav();});
+  window.addEventListener('storage',e=>{if(e.key===mobileNavKey||e.key===null){mobileNavOrder=readMobileNav();renderMobileNav();}});
+  mobileNavRoot.addEventListener('click',e=>{const b=e.target.closest('button[data-nav]');if(b&&mobileNavRoot.contains(b))navigate(b.dataset.nav);});
+  renderMobileNav();
+
   $('sidebarOverlay').addEventListener('click',hideDrawer);
-  document.querySelectorAll('[data-nav]').forEach((node)=>node.addEventListener('click',()=>navigate(node.dataset.nav)));
+  document.querySelectorAll('[data-nav]:not(.bottom-nav [data-nav])').forEach((node)=>node.addEventListener('click',()=>navigate(node.dataset.nav)));
   window.addEventListener('hashchange',()=>{const target=location.hash.slice(1);if(titles[target]) navigate(target,false);else if(['polls','music'].includes(target))navigate('home');});
   function navigate(page,push=true){
     if(page==='studio' && !accountIdentity?.admin)page='account';
@@ -110,8 +136,7 @@ window.KURSOR_STATIC_DATA={"notices":[],"materials":[{"discipline":"Методо
     if(!titles[page]) page='home';
     state.page=page; document.querySelectorAll('.page').forEach(el=>el.classList.toggle('active',el.id==='page-'+page));
     document.querySelectorAll('[data-nav]').forEach(el=>el.classList.toggle('selected',el.dataset.nav===page));
-    document.querySelectorAll('.bottom-nav [data-nav]').forEach(el=>el.classList.toggle('active',el.dataset.nav===page));
-    $('moreNav').classList.toggle('active',['admin','manage','guide','activity','appearance','group','methodology','account','planner','studio'].includes(page));
+    updateMobileNavActive();
     $('breadcrumbPage').textContent=titles[page];hideDrawer();
     if(push && location.hash!=='#'+page) history.replaceState(null,'','#'+page);
     window.scrollTo({top:0,behavior:'auto'});
