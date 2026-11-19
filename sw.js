@@ -1,5 +1,5 @@
-const CACHE='kursor-public-shell-v4-2-1';
-const FILES=['./index.html','./kursor.js?v=4.2.1','./kursor.css?v=4.2.1','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
+const CACHE='kursor-public-shell-v4-3-0';
+const FILES=['./index.html','./kursor.js?v=4.3.0','./kursor.css?v=4.3.0','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
 const scope=new URL(self.registration.scope);
 const url=x=>new URL(x,scope).href;
 const shell=url('./index.html');
@@ -22,7 +22,7 @@ self.addEventListener('fetch',event=>{
   event.respondWith((async()=>{
     const c=await caches.open(CACHE);
     if(!navigation){const hit=await c.match(u.href);if(hit)return hit;const res=await fetch(r);if(res.ok)await c.put(u.href,res.clone());return res;}
-    const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),2200);
+    const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),6000);
     try{const res=await fetch(r,{cache:'no-cache',signal:ctrl.signal});if(!res.ok)throw Error('HTTP '+res.status);await c.put(shell,res.clone());return res;}
     catch{return (await c.match(shell))||Response.error();}finally{clearTimeout(timer);}
   })());

@@ -318,3 +318,45 @@ body{background:var(--bg);color:var(--ink)}
 @media(max-width:650px){.top-profile #topName{max-width:76px;font-size:13px}.top-profile{gap:6px}.quick-theme{width:38px;height:38px}.small-avatar{width:34px;height:34px}.main-content{padding-left:16px;padding-right:16px}.hero{min-height:0}.hero-copy{padding:24px 22px 108px}.hero h2{font-size:clamp(28px,8.5vw,37px);letter-spacing:-1px}.hero-copy>p{max-width:100%;font-size:13px;line-height:1.7}.hero-actions{margin-top:18px}.hero-illustration{transform:scale(.38);bottom:-31px;right:-22px;opacity:.75}.k4-box{padding:16px 13px}.k4-achievements{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.k4-medal{min-height:164px;padding:12px 7px}.k4-medal-copy b{font-size:13px}.k4-medal-copy p{font-size:12px;line-height:1.45}.k4-row{flex-wrap:wrap}.k4-form input,.k4-form select,.k4-form textarea,.account-box input{font-size:16px}.k4-tabs{gap:6px}.k4-tabs button{font-size:12px;padding:8px 10px}.k4-profile{gap:12px}.k4-avatar{width:60px;height:60px}}
 @media(max-width:350px){.top-profile #topName{display:none}.topbar-right{gap:5px}.k4-achievements{grid-template-columns:1fr}.k4-medal{min-height:130px}.hero-copy{padding-bottom:95px}}
 @media(max-width:650px){.hero-copy{padding-bottom:76px}.hero-illustration{transform:scale(.34);bottom:-22px;right:-12px}.summary-grid{gap:10px}.summary-card{overflow:hidden}.summary-card>div{min-width:0}.k4-medal-copy b{hyphens:auto}.topbar-left:after{font-size:21px}}
+
+:root[data-visual-style="cyberpunk"][data-theme="light"]{--bg:#f7f0ff;--paper:#ffffff;--surface:#ffffff;--surface-soft:#eee4fc;--line:#ceb9e9;--ink:#29203e;--text:#29203e;--muted:#5e4c80}
+:root[data-visual-style="cyberpunk"][data-theme="light"] :is(.sidebar,.topbar,.bottom-nav,.surface,.summary-card,.student-card,.material-card,.award-card){background:var(--surface);border-color:var(--line);color:var(--ink)}
+
+:root[data-visual-style="cyberpunk"][data-theme="dark"]{--bg:#160e27;--paper:#211733;--surface:#211733;--surface-soft:#362348;--line:#523e70;--ink:#f4e9ff;--text:#f4e9ff;--muted:#c6b4e3}
+:root[data-visual-style="cyberpunk"][data-theme="dark"] :is(.sidebar,.topbar,.bottom-nav,.surface,.summary-card,.student-card,.material-card,.award-card){background:var(--surface);border-color:var(--line);color:var(--ink)}
+
+:root[data-visual-style="academia"][data-theme="light"]{--bg:#f1e6d2;--paper:#fff9ec;--surface:#fff9ec;--surface-soft:#e8dbc4;--line:#cbb996;--ink:#392d20;--text:#392d20;--muted:#74624a}
+:root[data-visual-style="academia"][data-theme="light"] :is(.sidebar,.topbar,.bottom-nav,.surface,.summary-card,.student-card,.material-card,.award-card){background:var(--surface);border-color:var(--line);color:var(--ink)}
+
+:root[data-visual-style="academia"][data-theme="dark"]{--bg:#251d15;--paper:#35291e;--surface:#35291e;--surface-soft:#483829;--line:#69523d;--ink:#f4e6ca;--text:#f4e6ca;--muted:#ccb89b}
+:root[data-visual-style="academia"][data-theme="dark"] :is(.sidebar,.topbar,.bottom-nav,.surface,.summary-card,.student-card,.material-card,.award-card){background:var(--surface);border-color:var(--line);color:var(--ink)}
+
+:root[data-visual-style="oldmoney"][data-theme="light"]{--bg:#eef0e5;--paper:#faf9f0;--surface:#faf9f0;--surface-soft:#e0e6d4;--line:#bec9b1;--ink:#253c30;--text:#253c30;--muted:#617461}
+:root[data-visual-style="oldmoney"][data-theme="light"] :is(.sidebar,.topbar,.bottom-nav,.surface,.summary-card,.student-card,.material-card,.award-card){background:var(--surface);border-color:var(--line);color:var(--ink)}
+
+:root[data-visual-style="oldmoney"][data-theme="dark"]{--bg:#14241d;--paper:#21352a;--surface:#21352a;--surface-soft:#2e4737;--line:#4a6550;--ink:#edf1dd;--text:#edf1dd;--muted:#b5c8ac}
+:root[data-visual-style="oldmoney"][data-theme="dark"] :is(.sidebar,.topbar,.bottom-nav,.surface,.summary-card,.student-card,.material-card,.award-card){background:var(--surface);border-color:var(--line);color:var(--ink)}
+
+:root[data-visual-style="y2k"][data-theme="light"]{--bg:#faeaf7;--paper:#fff7fd;--surface:#fff7fd;--surface-soft:#f5d9ee;--line:#e3a8d2;--ink:#4b214a;--text:#4b214a;--muted:#875e82}
+:root[data-visual-style="y2k"][data-theme="light"] :is(.sidebar,.topbar,.bottom-nav,.surface,.summary-card,.student-card,.material-card,.award-card){background:var(--surface);border-color:var(--line);color:var(--ink)}
+
+:root[data-visual-style="y2k"][data-theme="dark"]{--bg:#28142e;--paper:#3b2040;--surface:#3b2040;--surface-soft:#522a50;--line:#754569;--ink:#ffe8fa;--text:#ffe8fa;--muted:#e1afd7}
+:root[data-visual-style="y2k"][data-theme="dark"] :is(.sidebar,.topbar,.bottom-nav,.surface,.summary-card,.student-card,.material-card,.award-card){background:var(--surface);border-color:var(--line);color:var(--ink)}
+
+:root[data-visual-style="glass"][data-theme="light"]{--bg:#e4edf9;--paper:#f6faff;--surface:#f6faff;--surface-soft:#e8e7fa;--line:#c1cfe4;--ink:#233f60;--text:#233f60;--muted:#60738d}
+:root[data-visual-style="glass"][data-theme="light"] :is(.sidebar,.topbar,.bottom-nav,.surface,.summary-card,.student-card,.material-card,.award-card){background:var(--surface);border-color:var(--line);color:var(--ink)}
+
+:root[data-visual-style="glass"][data-theme="dark"]{--bg:#152033;--paper:#213149;--surface:#213149;--surface-soft:#2a405e;--line:#47617e;--ink:#e6f0ff;--text:#e6f0ff;--muted:#b6c9e4}
+:root[data-visual-style="glass"][data-theme="dark"] :is(.sidebar,.topbar,.bottom-nav,.surface,.summary-card,.student-card,.material-card,.award-card){background:var(--surface);border-color:var(--line);color:var(--ink)}
+
+:root[data-visual-style="midnight"][data-theme="light"]{--bg:#e8effc;--paper:#f8fbff;--surface:#f8fbff;--surface-soft:#dbe7f9;--line:#b7c9e8;--ink:#1b3356;--text:#1b3356;--muted:#526b91}
+:root[data-visual-style="midnight"][data-theme="light"] :is(.sidebar,.topbar,.bottom-nav,.surface,.summary-card,.student-card,.material-card,.award-card){background:var(--surface);border-color:var(--line);color:var(--ink)}
+
+:root[data-visual-style="midnight"][data-theme="dark"]{--bg:#091425;--paper:#11243b;--surface:#11243b;--surface-soft:#1a304f;--line:#344f74;--ink:#e5efff;--text:#e5efff;--muted:#a4badb}
+:root[data-visual-style="midnight"][data-theme="dark"] :is(.sidebar,.topbar,.bottom-nav,.surface,.summary-card,.student-card,.material-card,.award-card){background:var(--surface);border-color:var(--line);color:var(--ink)}
+
+.k43-season-band{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;min-height:104px;margin:18px 0;padding:18px 22px;border:1px solid #b979493f;border-radius:16px;background:linear-gradient(110deg,color-mix(in srgb,#c47c32 13%,var(--surface)),var(--surface));color:var(--ink)}.k43-season-band>div{display:grid;gap:5px;position:relative;z-index:1}.k43-season-band span{font-size:10px;letter-spacing:1.8px;color:var(--muted);font-weight:800}.k43-season-band b{font-family:Georgia,serif;font-size:23px}.k43-season-band small{color:var(--muted);font-size:12px}.k43-season-band svg{width:130px;height:80px;flex-shrink:0;color:#bf854b}.k43-season-band[data-season=winter]{background:linear-gradient(110deg,#73b5db26,var(--surface))}.k43-season-band[data-season=winter] svg{color:#89b6d9}.k43-season-band[data-season=spring]{background:linear-gradient(110deg,#dc86ac26,var(--surface))}.k43-season-band[data-season=spring] svg{color:#d88aaa}.k43-season-band[data-season=summer]{background:linear-gradient(110deg,#d7b24426,var(--surface))}.k43-season-band[data-season=summer] svg{color:#c6a744}.k43-player iframe{display:block;width:100%;border:0;border-radius:12px}.k43-player p{margin:9px 0}.k43-track .k4-action{white-space:nowrap}.k43-track{min-width:0}.k43-track .k4-grow{overflow-wrap:anywhere}.student-photo img,.award-picture img{object-fit:cover}.k43-season-band[hidden]{display:none!important}@media(max-width:480px){.k43-season-band{padding:14px;gap:4px}.k43-season-band svg{width:70px;height:65px}.k43-season-band b{font-size:20px}.k43-track .k4-action{font-size:11px}}
+:root[data-k4-season=autumn] .hero{border-bottom:3px solid #bd804c}
+:root .k4-form .btn-primary{color:#191919;background:var(--orange)}
+
+.k43-course-status{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:12px 16px;border:1px solid var(--line);color:var(--muted);background:var(--surface);border-radius:10px;margin:10px 0;font-size:12px}.k43-course-status button{flex-shrink:0}
