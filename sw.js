@@ -1,0 +1,5 @@
+const CACHE='kursor-public-shell-v4-1';
+const FILES=['./','./index.html','./kursor.js','./kursor.css','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
+self.addEventListener('install',e=>e.waitUntil((async()=>{const c=await caches.open(CACHE);await c.addAll(FILES.map(u=>new Request(u,{cache:'reload'})));await self.skipWaiting();})()));
+self.addEventListener('activate',e=>e.waitUntil((async()=>{for(const key of await caches.keys())if(key.startsWith('kursor-public-shell-')&&key!==CACHE)await caches.delete(key);await self.clients.claim();})()));
+self.addEventListener('fetch',e=>{const r=e.request,u=new URL(r.url),scope=new URL(self.registration.scope);if(r.method!=='GET'||u.origin!==scope.origin||r.headers.has('Authorization'))return;const allowed=FILES.map(x=>new URL(x,scope).pathname);if(!allowed.includes(u.pathname))return;e.respondWith((async()=>{const cache=await caches.open(CACHE);try{const res=await fetch(r);if(res.ok){await cache.put(new Request(u.origin+u.pathname),res.clone());}return res;}catch{const hit=await cache.match(new Request(u.origin+u.pathname));return hit||Response.error();}})());});
