@@ -1,5 +1,5 @@
-const CACHE='kursor-public-shell-v4-6-0';
-const FILES=['./index.html','./kursor.js?v=4.6.0','./kursor.css?v=4.6.0','./manifest.webmanifest?v=4.6.0','./icon-192.png?v=4.6.0','./icon-512.png?v=4.6.0'];
+const CACHE='kursor-public-shell-v4-7-0';
+const FILES=['./index.html','./kursor.js?v=4.7.0','./kursor.css?v=4.7.0','./manifest.webmanifest?v=4.7.0','./icon-192.png?v=4.7.0','./icon-512.png?v=4.7.0'];
 const scope=new URL(self.registration.scope);
 const url=x=>new URL(x,scope).href;
 const shell=url('./index.html');
